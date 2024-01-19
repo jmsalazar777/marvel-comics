@@ -30,11 +30,11 @@
 
                 </div>
 
-                <div class="modal fade" id="marvel-hero-modal-<?php echo sanitize_title($hero_name); ?>" tabindex="-1" role="dialog" aria-labelledby="marvel-hero-modal-label-<?php echo sanitize_title($hero_name); ?>" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                <div class="modal" id="marvel-hero-modal-<?php echo sanitize_title($hero_name); ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="marvel-hero-modal-label-<?php echo sanitize_title($hero_name); ?>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="marvel-hero-modal-label-<?php echo sanitize_title($hero_name); ?>"><?php echo $hero_name; ?></h5>
+                                <h3 class="modal-title" id="marvel-hero-modal-label-<?php echo sanitize_title($hero_name); ?>"><?php echo $hero_name; ?></h3>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -52,7 +52,12 @@
                                     <p><?php echo implode(', ', array_column($hero['events']['items'], 'name')); ?></p>
                                     <h3>Stories:</h3>
                                     <p><?php echo implode(', ', array_column($hero['stories']['items'], 'name')); ?></p>
+                                    <h3>Comics:</h3>
+                                    <p><?php echo implode(', ', array_column($hero['comics']['items'], 'name')); ?></p>
                                 </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>

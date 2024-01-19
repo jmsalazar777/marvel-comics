@@ -12,28 +12,35 @@ class Marvel_Comics_Public
 
 		add_shortcode('marvel_comics', array($this, 'marvel_comics_shortcode'));
 		add_shortcode('marvel_heroes', array($this, 'marvel_heroes_shortcode'));
+		add_shortcode('marvel_news', array($this, 'marvel_comics_news_shortcode'));
 	}
 
 	public function enqueue_styles()
 	{
 		wp_enqueue_style($this->marvel_comics, plugin_dir_url(__FILE__) . 'css/styles.css', array(), $this->version, 'all');
-		wp_enqueue_style('bootstrap-css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
 	}
 
 	public function enqueue_scripts()
 	{
-		wp_enqueue_script('jquery');
-		wp_enqueue_script('popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', array('jquery'), '', true);
-		wp_enqueue_script('bootstrap-js', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array('popper'), '', true);
-		wp_enqueue_script($this->marvel_comics, plugin_dir_url(__FILE__) . 'js/scripts.js', array('jquery'), $this->version, true);
+		// Enqueue Bootstrap CSS
+		wp_enqueue_style('bootstrap-css', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap.min.css', array(), '4.3.1', 'all');
+
+		// Enqueue Bootstrap JS with Popper
+		wp_enqueue_script('popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', array('jquery'), '1.14.7', true);
+		wp_enqueue_script('bootstrap-js', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/js/bootstrap.min.js', array('popper', 'jquery'), '4.3.1', true);
+
+		// Enqueue your custom script
+		// wp_enqueue_script($this->marvel_comics, plugin_dir_url(__FILE__) . 'js/scripts.js', array('jquery'), $this->version, true);
 	}
+
+
 
 	public function marvel_comics_shortcode($atts)
 	{
 		$this->fetch_marvel_comics();
 
 		ob_start();
-		include(plugin_dir_path(__FILE__) . '/partials/marvel-comics-public-display.php');
+		include(plugin_dir_path(__FILE__) . '/partials/marvel-comics-display.php');
 		$content = ob_get_clean();
 
 		return $content;
@@ -52,7 +59,21 @@ class Marvel_Comics_Public
 		$characters_data = $this->fetch_marvel_characters($name, $name_starts_with, $modified_since, $comics, $series, $events, $stories);
 
 		ob_start();
-		include(plugin_dir_path(__FILE__) . '/partials/marvel-heroes-public-display.php');
+		include(plugin_dir_path(__FILE__) . '/partials/marvel-heroes-display.php');
+		$content = ob_get_clean();
+
+		return $content;
+	}
+
+	public function marvel_comics_news_shortcode($atts)
+	{
+		$comics = '';
+		$events = '';
+
+		$news_data = $this->fetch_marvel_news($comics, $events);
+
+		ob_start();
+		include(plugin_dir_path(__FILE__) . '/partials/marvel-comics-news.php');
 		$content = ob_get_clean();
 
 		return $content;
@@ -130,5 +151,37 @@ class Marvel_Comics_Public
 		$characters_data = $data['data']['results'];
 
 		return $characters_data;
+	}
+
+	public function fetch_marvel_news($comics = '', $events = '')
+	{
+		$api_url = 'https://gateway.marvel.com/v1/public/events'; // Use the comics endpoint
+
+		$api_params = array(
+			'apikey' => $this->marvel_api_key,
+			'hash' => md5(time() . $this->marvel_hash . $this->marvel_api_key),
+			'ts' => time(),
+			'limit' => 6,
+		);
+
+		if (!empty($comics)) {
+			$api_params['comics'] = $comics;
+		}
+
+		if (!empty($events)) {
+			$api_params['events'] = $events;
+		}
+
+		$response = wp_remote_get(add_query_arg($api_params, $api_url));
+
+		if (is_wp_error($response)) {
+			return 'Error fetching Marvel news';
+		}
+
+		$body = wp_remote_retrieve_body($response);
+		$data = json_decode($body, true);
+		$news_data = $data['data']['results'];
+
+		return $news_data;
 	}
 }

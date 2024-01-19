@@ -1,5 +1,10 @@
+.modal-backdrop.show {
+  z-index: 0 !important;
+}
+
 .marvel-comics-container,
-.marvel-heroes-container {
+.marvel-heroes-container,
+.marvel-news-container {
   max-width: 1335px;
   margin: auto;
 }
@@ -34,6 +39,11 @@
   font-weight: 600;
   line-height: normal;
   display: block;
+}
+
+.marvel-hero-item a:hover {
+  color: #f0141e !important;
+  text-decoration: none !important;
 }
 
 .marvel-comics-item-title {
@@ -72,7 +82,7 @@
 
 .modal-dialog {
   max-width: 80% !important;
-  margin-top: 8% !important;
+  width: 100% !important;
 }
 
 .modal-body {
@@ -80,6 +90,8 @@
   align-items: flex-start;
   justify-content: center;
   gap: 20px;
+  max-height: 50vh;
+  overflow-y: auto;
 }
 
 .modal-content {
@@ -92,12 +104,12 @@
 }
 
 .modal-title {
-  color: #f0141e;
-  font-family: "Roboto", sans-serif;
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  color: #f0141e !important;
+  font-family: "Roboto", sans-serif !important;
+  font-size: 30px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: normal !important;
 }
 
 .hero-thumbnail {
@@ -110,17 +122,46 @@
 }
 
 .hero-info h3 {
-  color: #f0141e;
-  font-family: "Roboto", sans-serif;
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  padding: 30px 0 15px;
+  color: #f0141e !important;
+  font-family: "Roboto", sans-serif !important;
+  font-size: 22px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: normal !important;
+  padding: 0 0 15px !important;
 }
 
 .hero-info p {
   color: #fff;
+  padding-bottom: 20px;
+  font-size: 16px;
+}
+
+/* news */
+.marvel-news-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 40px;
+}
+.marvel-news-item {
+  width: 100%;
+  max-width: 606px;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+.marvel-news-item img {
+  width: 215px;
+  height: 126px;
+  object-fit: cover;
+}
+.marvel-news-item p {
+  width: 370px;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28.13px;
+  color: #ffffff;
 }
 
 @media screen and (max-width: 1024px) {
@@ -147,5 +188,17 @@
   .marvel-heroes-list {
     row-gap: 30px;
     column-gap: 30px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .marvel-news-item {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .marvel-news-item p {
+    text-align: center;
   }
 }
