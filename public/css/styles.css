@@ -1,0 +1,71 @@
+.marvel-comics-container,
+.marvel-heroes-container {
+  max-width: 1335px;
+  margin: auto;
+}
+
+.marvel-comics-list,
+.marvel-heroes-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  row-gap: 105px;
+  column-gap: 65px;
+}
+
+.marvel-comics-item,
+.marvel-hero-item {
+  width: 100%;
+  max-width: 285px;
+}
+
+.marvel-comics-item-img,
+.marvel-hero-item-img {
+  width: 100%;
+  max-width: 285px;
+  height: 350px;
+  object-fit: cover;
+}
+.marvel-hero-item-name {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: block;
+}
+
+.marvel-comics-item-title {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: block;
+  padding-top: 18px;
+}
+
+.marvel-comics-no-result,
+.marvel-heroes-no-result {
+  color: red;
+  font-size: 20px;
+}
+
+.marvel-hero-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding-top: 18px;
+}
+
+.marvel-hero-info p {
+  color: #f0141e;
+  font-family: "Roboto", sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
