@@ -69,3 +69,83 @@
   font-weight: 400;
   line-height: normal;
 }
+
+.modal-dialog {
+  max-width: 80% !important;
+  margin-top: 8% !important;
+}
+
+.modal-body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+}
+
+.modal-content {
+  background-color: #000 !important;
+  border: 1px solid #fff !important;
+}
+
+.close {
+  color: #fff !important;
+}
+
+.modal-title {
+  color: #f0141e;
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.hero-thumbnail {
+  width: 100%;
+  flex-basis: 20%;
+}
+
+.hero-info {
+  flex-basis: 80%;
+}
+
+.hero-info h3 {
+  color: #f0141e;
+  font-family: "Roboto", sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 30px 0 15px;
+}
+
+.hero-info p {
+  color: #fff;
+}
+
+@media screen and (max-width: 1024px) {
+  .modal-body {
+    flex-direction: column;
+  }
+
+  .hero-thumbnail,
+  .hero-info {
+    flex-basis: 100%;
+  }
+
+  .hero-thumbnail {
+    text-align: center;
+  }
+
+  .marvel-hero-item-name {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .marvel-comics-list,
+  .marvel-heroes-list {
+    row-gap: 30px;
+    column-gap: 30px;
+  }
+}

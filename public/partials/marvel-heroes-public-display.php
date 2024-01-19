@@ -40,19 +40,24 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="her0-thumbnail">
+                                <div class="hero-thumbnail">
                                     <img class="marvel-hero-item-img" src="<?php echo $hero_thumbnail; ?>" alt="<?php echo $hero_name; ?>">
                                 </div>
                                 <div class="hero-info">
                                     <h3>Description:</h3>
                                     <p><?php echo $hero_description; ?></p>
                                     <h3>Series:</h3>
-                                    <p><?php echo $series; ?></p>
+                                    <p><?php echo implode(', ', array_column($hero['series']['items'], 'name')); ?></p>
+                                    <h3>Events:</h3>
+                                    <p><?php echo implode(', ', array_column($hero['events']['items'], 'name')); ?></p>
+                                    <h3>Stories:</h3>
+                                    <p><?php echo implode(', ', array_column($hero['stories']['items'], 'name')); ?></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             <?php
             }
             ?>
