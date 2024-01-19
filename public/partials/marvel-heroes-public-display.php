@@ -12,6 +12,12 @@
 
                 $hero_comics = $this->fetch_marvel_characters($hero_name, '', $modified_date);
 
+                $comics = isset($hero['comics']) ? $hero['comics'] : array();
+                $series = isset($hero['series']) ? $hero['series'] : array();
+                $events = isset($hero['events']) ? $hero['events'] : array();
+                $stories = isset($hero['stories']) ? $hero['stories'] : array();
+
+
             ?>
                 <div class="marvel-hero-item">
                     <img class="marvel-hero-item-img" src="<?php echo $hero_thumbnail; ?>" alt="<?php echo $hero_name; ?>">
@@ -38,8 +44,10 @@
                                     <img class="marvel-hero-item-img" src="<?php echo $hero_thumbnail; ?>" alt="<?php echo $hero_name; ?>">
                                 </div>
                                 <div class="hero-info">
+                                    <h3>Description:</h3>
                                     <p><?php echo $hero_description; ?></p>
-                                    <p><?php echo $modified_date; ?></p>
+                                    <h3>Series:</h3>
+                                    <p><?php echo $series; ?></p>
                                 </div>
                             </div>
                         </div>
